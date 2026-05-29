@@ -2,37 +2,38 @@ const assert = require('node:assert/strict')
 const { beforeEach, describe, it } = require('node:test')
 
 // npm modules
-const fixtures = require('haraka-test-fixtures')
+const { makeConnection, makePlugin } = require('haraka-test-fixtures')
 
 // start of tests
 //    assert: https://nodejs.org/api/assert.html
 
-beforeEach(function () {
-  this.plugin = new fixtures.plugin('messagesniffer')
+let plugin
+
+beforeEach(() => {
+  plugin = makePlugin('messagesniffer', { register: false })
 })
 
-describe('messagesniffer', function () {
-  it('loads', function () {
-    assert.ok(this.plugin)
+describe('messagesniffer', () => {
+  it('loads', () => {
+    assert.ok(plugin)
   })
 })
 
-describe('load_messagesniffer_ini', function () {
-  it('loads messagesniffer.ini from config/messagesniffer.ini', function () {
-    this.plugin.load_messagesniffer_ini()
-    assert.ok(this.plugin.cfg)
+describe('load_messagesniffer_ini', () => {
+  it('loads messagesniffer.ini from config/messagesniffer.ini', () => {
+    plugin.load_messagesniffer_ini()
+    assert.ok(plugin.cfg)
   })
 })
 
-describe('uses text fixtures', function () {
-  it('sets up a connection', function () {
-    this.connection = fixtures.connection.createConnection({})
-    assert.ok(this.connection.server)
+describe('uses text fixtures', () => {
+  it('sets up a connection', () => {
+    const connection = makeConnection()
+    assert.ok(connection.server)
   })
 
-  it('sets up a transaction', function () {
-    this.connection = fixtures.connection.createConnection({})
-    this.connection.transaction = fixtures.transaction.createTransaction({})
-    assert.ok(this.connection.transaction.header)
+  it('sets up a transaction', () => {
+    const connection = makeConnection({ withTxn: true })
+    assert.ok(connection.transaction.header)
   })
 })

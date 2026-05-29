@@ -1,7 +1,6 @@
-[![CI Test Status][ci-img]][ci-url]
-[![Code Climate][clim-img]][clim-url]
-
 # haraka-plugin-messagesniffer
+
+[![Test][ci-img]][ci-url] [![Cover][cov-img]][cov-url] [![Qlty][qlty-img]][qlty-url]
 
 This plugin provides integration with the commerical Anti-Spam product [MessageSniffer](http://armresearch.com/products/sniffer.jsp) by Arm Research Labs using its XML Client interface [XCI](http://armresearch.com/support/articles/software/snfServer/xci/) over TCP.
 
@@ -164,5 +163,7 @@ $EDITOR config/messagesniffer.ini
 
 [ci-img]: https://github.com/haraka/haraka-plugin-messagesniffer/actions/workflows/ci.yml/badge.svg
 [ci-url]: https://github.com/haraka/haraka-plugin-messagesniffer/actions/workflows/ci.yml
-[clim-img]: https://codeclimate.com/github/haraka/haraka-plugin-messagesniffer/badges/gpa.svg
-[clim-url]: https://codeclimate.com/github/haraka/haraka-plugin-messagesniffer
+[cov-img]: https://codecov.io/github/haraka/haraka-plugin-messagesniffer/coverage.svg
+[cov-url]: https://codecov.io/github/haraka/haraka-plugin-messagesniffer
+[qlty-img]: https://qlty.sh/gh/haraka/projects/haraka-plugin-messagesniffer/maintainability.svg
+[qlty-url]: https://qlty.sh/gh/haraka/projects/haraka-plugin-messagesniffer

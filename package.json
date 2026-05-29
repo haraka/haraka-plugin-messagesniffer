@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/haraka/haraka-plugin-messagesniffer#readme",
   "devDependencies": {
-    "@haraka/eslint-config": "^2.0.4",
+    "@haraka/eslint-config": "^3.0.0",
     "haraka-test-fixtures": "^1.7.0"
   },
   "prettier": {

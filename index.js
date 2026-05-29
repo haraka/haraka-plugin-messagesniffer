@@ -11,12 +11,10 @@ exports.register = function () {
 }
 
 exports.load_messagesniffer_ini = function () {
-  // C2: hot-reload — re-read on file change so operators don't have to bounce
-  // Haraka for messagesniffer config tweaks.
   this.cfg = cfg = this.config.get('messagesniffer.ini', () => {
     this.load_messagesniffer_ini()
   })
-  if (cfg.main.port) port = parseInt(cfg.main.port) || 9001
+  if (cfg.main.port) cfg.main.port = parseInt(cfg.main.port) || 9001
 }
 
 exports.hook_connect = function (next, connection) {

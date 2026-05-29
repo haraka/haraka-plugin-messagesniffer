@@ -38,7 +38,7 @@ describe('uses text fixtures', () => {
   })
 })
 
-describe('AUDIT C2: load_messagesniffer_ini hot-reload', () => {
+describe('load_messagesniffer_ini hot-reload', () => {
   it('passes a watchCb to config.get', () => {
     let captured
     plugin.config.get = (name, opts) => {

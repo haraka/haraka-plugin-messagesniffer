@@ -11,14 +11,19 @@ exports.register = function () {
 }
 
 exports.load_messagesniffer_ini = function () {
-  this.cfg = cfg = this.config.get('messagesniffer.ini')
+  // C2: hot-reload — re-read on file change so operators don't have to bounce
+  // Haraka for messagesniffer config tweaks.
+  this.cfg = cfg = this.config.get('messagesniffer.ini', () => {
+    this.load_messagesniffer_ini()
+  })
   if (cfg.main.port) port = parseInt(cfg.main.port) || 9001
 }
 
 exports.hook_connect = function (next, connection) {
-  // Skip any private IP ranges
-  // Skip connection.transaction undefined
-  if (connection?.remote?.is_private || !connection?.transaction) return next()
+  // Skip any private IP ranges. C1: do NOT guard on connection.transaction
+  // here — hook_connect fires before any transaction exists, so the previous
+  // guard silently skipped every connect-time GBUdb lookup.
+  if (connection?.remote?.is_private) return next()
 
   // Retrieve GBUdb information for the connecting IP
   SNFClient(
@@ -84,9 +89,13 @@ exports.hook_connect = function (next, connection) {
                 case 'quarantine':
                   connection.notes.gbudb.action = 'quarantine'
                   connection.notes.quarantine = true
+                  // hook_connect runs before a transaction exists; the uuid
+                  // is only available once data_post acts on the flag.
                   connection.notes.quarantine_action = [
                     OK,
-                    `Message quarantined (${connection.transaction.uuid})`,
+                    connection.transaction
+                      ? `Message quarantined (${connection.transaction.uuid})`
+                      : 'Message quarantined',
                   ]
                   break
                 case 'tag':

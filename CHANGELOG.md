@@ -4,7 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Unreleased
 
-- test: refactored against test-fixtures 1.7.0
+### [1.0.2] - 2026-05-29
+
+- fix: `hook_connect` no longer skips GBUdb lookup when no txn
+- fix: hot-reload `messagesniffer.ini`
+- fix: avoid `transaction.uuid` deref before a txn established
+- test: refactored against test-fixtures 1.7.0 (#2)
 
 ### [1.0.1] - 2025-01-26
 
@@ -16,7 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - initial release / repackaged from haraka/Haraka
 
 [1.0.0]: https://github.com/haraka/haraka-plugin-messagesniffer/releases/tag/v1.0.0
-[1.0.1]: https://github.com/haraka/haraka-plugin-messagesniffer/releases/tag/1.0.1
+[1.0.1]: https://github.com/haraka/haraka-plugin-messagesniffer/releases/tag/v1.0.1
 [1.0.2]: https://github.com/haraka/haraka-plugin-messagesniffer/releases/tag/1.0.2
 [1.0.3]: https://github.com/haraka/haraka-plugin-messagesniffer/releases/tag/1.0.3
 [1.0.6]: https://github.com/haraka/haraka-plugin-messagesniffer/releases/tag/v1.0.6

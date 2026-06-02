@@ -37,3 +37,15 @@ describe('uses text fixtures', () => {
     assert.ok(connection.transaction.header)
   })
 })
+
+describe('load_messagesniffer_ini hot-reload', () => {
+  it('passes a watchCb to config.get', () => {
+    let captured
+    plugin.config.get = (name, opts) => {
+      if (typeof opts === 'function') captured = opts
+      return { main: {} }
+    }
+    plugin.load_messagesniffer_ini()
+    assert.equal(typeof captured, 'function')
+  })
+})
